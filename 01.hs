@@ -2,7 +2,7 @@ import Data.List
 
 main = do
     input <- readFile "01.in"
-    let ls = (sort . map read) <$> transpose (words <$> lines input)
+    let ls = sort . map read <$> transpose (words <$> lines input)
     print
         (sum [abs (a-b) | [a,b] <- transpose ls],
         score ls)
