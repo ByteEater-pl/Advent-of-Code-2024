@@ -1,14 +1,14 @@
 import Data.List
 
 main = do
-    ls <- lines <$> readFile "01.in"
-    let ns = (sort . map read) <$> transpose (words <$> ls)
+    input <- readFile "01.in"
+    let ls = (sort . map read) <$> transpose (words <$> lines input)
     print
-        (sum [abs (a-b) | [a,b] <- transpose ns],
-        score ns)
+        (sum [abs (a-b) | [a,b] <- transpose ls],
+        score ls)
 
-score ns@(~[(h:t),l]) =
-    if any null ns
+score ls@(~[(h:t),l]) =
+    if any null ls
     then 0
     else h * length i + score [t,r]
     where (i,r) = span (==h) $ dropWhile (<h) l
