@@ -9,7 +9,7 @@ main = do
                 all (`elem` map (*s) [1..3]) (zipWith (-) l t)
                 | s <- [1,-1],
                   l@(_:t) <- variants report])
-        $ map (map read . words)
-        $ lines input
+        $ map read . words
+        <$> lines input
         | variants <-
             [(:[]), \l -> zipWith (++) (inits l) (drop 1 <$> tails l)]]
