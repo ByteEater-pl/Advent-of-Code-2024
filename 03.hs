@@ -19,9 +19,9 @@ main = do
                 input]
         | skip <- [
             pfail,
-            Nothing <$ (
-                string "don't()"
-                *> manyTill get (void (string "do()") <++ eof))
+            Nothing
+            <$ string "don't()"
+            <* manyTill get (void (string "do()") <++ eof)
             ]]
 
 number = read <$> (mfilter ((`elem` [1..3]).length) $ many $ satisfy isDigit)
