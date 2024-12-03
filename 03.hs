@@ -1,5 +1,6 @@
 import Control.Monad
 import Data.Char
+import Data.Functor
 import Text.ParserCombinators.ReadP
 
 main = do
@@ -14,13 +15,13 @@ main = do
                         <$> (string "mul(" *> number)
                         <*> (char ',' *> number <* char ')'))
                     <++ skip
-                    <++ (get *> pure Nothing)
+                    <++ (get $> Nothing)
                     ) <* eof)
                 input]
         | skip <- [
             pfail,
             string "don't()"
             *> manyTill get (void (string "do()") <++ eof)
-            *> pure Nothing]]
+            $> Nothing]]
 
 number = read <$> (mfilter ((`elem` [1..3]).length) $ many $ satisfy isDigit)
