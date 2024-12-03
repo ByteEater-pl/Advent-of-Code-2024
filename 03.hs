@@ -4,7 +4,7 @@ import Text.ParserCombinators.ReadP
 
 main = do
     input <- readFile "03.in"
-    print $ [
+    print [
         sum [a*b | Just (a,b) <-
             fst $
             head $
